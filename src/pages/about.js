@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
-import M from "materialize-css"
+// import M from "materialize-css"
 import Layout from "../components/Layout"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import MailOutlineIcon from "@material-ui/icons/MailOutline"
@@ -13,7 +13,12 @@ import CEO from "../images/mwas.jpg"
 
 export default function About() {
   useEffect(() => {
-    M.Parallax.init(document.querySelectorAll(".parallax"))
+    if (typeof window !== 'undefined') {
+      import ('materialize-css').then((M) => {
+        M.Parallax.init(document.querySelectorAll(".parallax"))
+      })
+    }
+    
   }, [])
 
   const data = useStaticQuery(graphql`

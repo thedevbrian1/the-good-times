@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
-import M from "materialize-css"
+// import M from "materialize-css"
 import Layout from "../components/Layout"
 // import Elephant from "../images/elephant.jpg"
 // import Buffalo from "../images/buffalo.jpg"
@@ -18,66 +18,70 @@ import { AnchorLink } from "gatsby-plugin-anchor-links"
 
 export default function Home() {
   useEffect(() => {
-    let elems = document.querySelectorAll(".carousel")
-    M.Carousel.init(elems, {
-      fullWidth: true,
-      indicators: true,
-    });
-    M.Parallax.init(document.querySelectorAll('.parallax'))
+    if (typeof window !== "undefined") {
+      import("materialize-css").then(M => {
+        let elems = document.querySelectorAll(".carousel")
+        M.Carousel.init(elems, {
+          fullWidth: true,
+          indicators: true,
+        })
+        M.Parallax.init(document.querySelectorAll(".parallax"))
+      })
+    }
   }, [])
 
   const data = useStaticQuery(graphql`
     query {
-      elephant: file(relativePath: { eq: "elephant.jpg"}) {
+      elephant: file(relativePath: { eq: "elephant.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      lion: file(relativePath: { eq: "close-up-photo-of-lion-s-head.jpg"}) {
+      lion: file(relativePath: { eq: "close-up-photo-of-lion-s-head.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      rhino: file(relativePath: { eq: "rhino.jpg"}) {
+      rhino: file(relativePath: { eq: "rhino.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      buffalo: file(relativePath: { eq: "buffalo.jpg"}) {
+      buffalo: file(relativePath: { eq: "buffalo.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      leopard: file(relativePath: { eq: "brown-leopard.jpg"}) {
+      leopard: file(relativePath: { eq: "brown-leopard.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      safari: file(relativePath: { eq: "safari.jpg"}) {
+      safari: file(relativePath: { eq: "safari.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      hotel: file(relativePath: { eq: "hotel.jpg"}) {
+      hotel: file(relativePath: { eq: "hotel.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      booking: file(relativePath: { eq: "booking.jpg"}) {
+      booking: file(relativePath: { eq: "booking.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 2000) {
             ...GatsbyImageSharpFluid
@@ -124,17 +128,30 @@ export default function Home() {
         <div className="section">
           <div className="row">
             <div className="col s12 m12">
-              <h2 className="center teal-text text-lighten-2 load-hidden reveal-element" data-sal="slide-up" data-sal-delay="400" data-sal-easing="ease">
+              <h2
+                className="center teal-text text-lighten-2 load-hidden reveal-element"
+                data-sal="slide-up"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 Our Services
               </h2>
             </div>
           </div>
           <div className="row">
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   {/* <img className="activator" src={Safari} alt="Navigation" /> */}
-                  <Img fluid={data.safari.childImageSharp.fluid} className="activator"/>
+                  <Img
+                    fluid={data.safari.childImageSharp.fluid}
+                    className="activator"
+                  />
                 </div>
                 <div className="card-content">
                   <span className="card-title activator grey-text text-darken-4">
@@ -156,14 +173,22 @@ export default function Home() {
             </div>
 
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   {/* <img
                     className="activator"
                     src={Hotel}
                     alt="Diani Reef Beach Resort Spa"
                   /> */}
-                  <Img fluid={data.hotel.childImageSharp.fluid} className="activator" />
+                  <Img
+                    fluid={data.hotel.childImageSharp.fluid}
+                    className="activator"
+                  />
                 </div>
                 <div className="card-content">
                   <span className="card-title activator grey-text text-darken-4">
@@ -187,14 +212,22 @@ export default function Home() {
             </div>
 
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   {/* <img
                     className="activator"
                     src={Booking}
                     alt="Booking Services"
                   /> */}
-                  <Img fluid={data.booking.childImageSharp.fluid} className="activator" />
+                  <Img
+                    fluid={data.booking.childImageSharp.fluid}
+                    className="activator"
+                  />
                 </div>
                 <div className="card-content">
                   <span className="card-title activator grey-text text-darken-4">
@@ -245,7 +278,10 @@ export default function Home() {
               </h3>
               <h4
                 id="packages"
-                className="load-hidden reveal-element teal-text text-lighten-2" data-sal="slide-up" data-sal-delay="400" data-sal-easing="ease"
+                className="load-hidden reveal-element teal-text text-lighten-2"
+                data-sal="slide-up"
+                data-sal-delay="400"
+                data-sal-easing="ease"
               >
                 Packages
               </h4>
@@ -253,7 +289,12 @@ export default function Home() {
           </div>
           <div className="row">
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   <img
                     className="activator"
@@ -284,7 +325,12 @@ export default function Home() {
             </div>
 
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   <img
                     className="activator"
@@ -315,7 +361,12 @@ export default function Home() {
             </div>
 
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   <img
                     className="activator"
@@ -346,7 +397,12 @@ export default function Home() {
             </div>
 
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   <img
                     className="activator"
@@ -377,7 +433,12 @@ export default function Home() {
             </div>
 
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   <img
                     className="activator"
@@ -408,7 +469,12 @@ export default function Home() {
             </div>
 
             <div className="col s12 m6 l4">
-              <div className="card sticky-action hoverable load-hidden reveal-card" data-sal="slide-left" data-sal-delay="400" data-sal-easing="ease">
+              <div
+                className="card sticky-action hoverable load-hidden reveal-card"
+                data-sal="slide-left"
+                data-sal-delay="400"
+                data-sal-easing="ease"
+              >
                 <div className="card-image waves-effect waves-block waves-light">
                   <img
                     className="activator"
@@ -456,11 +522,16 @@ export default function Home() {
         </div>
       </div>
       <div className="row">
-        <div className="col s12 center" id="contact-main-page" data-sal="slide-up" data-sal-delay="400" data-sal-easing="ease">
-        
-            <AnchorLink to="/about#contact-form">
-             <Button text="Contact Us"/>
-            </AnchorLink>
+        <div
+          className="col s12 center"
+          id="contact-main-page"
+          data-sal="slide-up"
+          data-sal-delay="400"
+          data-sal-easing="ease"
+        >
+          <AnchorLink to="/about#contact-form">
+            <Button text="Contact Us" />
+          </AnchorLink>
         </div>
       </div>
     </Layout>

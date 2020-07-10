@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { Helmet } from "react-helmet"
 import { Link } from "gatsby"
 import { AnchorLink } from "gatsby-plugin-anchor-links"
-import M from "materialize-css"
+// import M from "materialize-css"
 import "materialize-css/dist/css/materialize.min.css"
 import MenuIcon from "@material-ui/icons/Menu"
 import Logo from "../images/good-times.svg"
@@ -12,7 +12,12 @@ import "../styles/style.css"
 
 export default function Layout({ children }) {
   useEffect(() => {
-    M.Sidenav.init(document.querySelectorAll('.sidenav'))
+    if (typeof window !== 'undefined') {
+      import ('materialize-css').then((M) => {
+        M.Sidenav.init(document.querySelectorAll('.sidenav'))
+      })
+    }
+    
     
   }, [])
   return (
